@@ -33,17 +33,15 @@ for generacion in range(num_generaciones):
 
     tableros_perf_ind = [i for i, fitness in enumerate(fitness_poblacion) if fitness == 1]
     tableros_perf = [poblacion[i] for i in tableros_perf_ind]
-    print(
-        f'En la Generación {generacion + 1} existen {len(tableros_perf)} tableros perfectos y son: {tableros_perf}')
+    print(f'En la Generación {generacion + 1} existen {len(tableros_perf)} tableros perfectos y son: {tableros_perf}')
 
 
 
 
-plt.plot(range(20), fit_generacion, label=r'$\text{fitness} = \frac{1}{\text{ataques} + 1}$', color='b')
+plt.plot(range(20), fit_generacion, color='b')
 plt.title('Promedio de Fitness por Generación')
 plt.xlabel('Generación')
-plt.ylabel('Fitness Promedio')
-plt.legend(loc='best')
+plt.ylabel('Fitness Promedio (Ataques Promedio)')
 plt.grid(True)
 
 plt.show()

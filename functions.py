@@ -17,7 +17,7 @@ def pob(n):
 def fitness(tablero):
     ataques = 0
     ataques = sum(1 for i in range(8) for j in range(i + 1, 8) if abs(tablero[i] - tablero[j]) == abs(i - j))
-    return 1 / (ataques + 1 )
+    return ataques
 
 
 # SELECCIÓN DE PADRES UNIVERSAL ESTOCÁSTICA
@@ -126,8 +126,8 @@ def mezcla(individuo):
 def brecha_generacional(padres, hijos, lam):
     fitness_padres = [fitness(i) for i in padres]
 
-    indices_eliminar = sorted(range(len(fitness_padres)), key=lambda i: fitness_padres[i])[:lam]
+    indices_eliminar = sorted(range(len(fitness_padres)), key=lambda i: fitness_padres[i])[lam:]
     nuevos_padres = [padres[i] for i in range(len(padres)) if i not in indices_eliminar]
-    nuevos_padres.extend(hijos[:lam])
+    nuevos_padres.extend(hijos[lam:])
 
     return nuevos_padres
