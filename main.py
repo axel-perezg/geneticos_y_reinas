@@ -31,18 +31,28 @@ for generacion in range(num_generaciones):
     # Eliminamos a los 25 peores padres para agregar 25 hijos
     poblacion = functions.brecha_generacional(poblacion, hijos, 25)
 
-    tableros_perf_ind = [i for i, fitness in enumerate(fitness_poblacion) if fitness == 1]
+    tableros_perf_ind = [i for i, fitness in enumerate(fitness_poblacion) if fitness == 0]
     tableros_perf = [poblacion[i] for i in tableros_perf_ind]
     print(f'En la Generación {generacion + 1} existen {len(tableros_perf)} tableros perfectos y son: {tableros_perf}')
 
 
 
+plt.figure(figsize=(10, 6), dpi=300)
 
-plt.plot(range(20), fit_generacion, color='b')
-plt.title('Promedio de Fitness por Generación')
-plt.xlabel('Generación')
-plt.ylabel('Fitness Promedio (Ataques Promedio)')
-plt.grid(True)
+plt.plot(range(1, num_generaciones + 1), fit_generacion, marker='o', linestyle='-', color='b', label='Fitness Promedio')
+
+
+plt.scatter(num_generaciones, fit_generacion[-1], color='r', label='Última Generación', zorder=5)
+
+plt.title('Evolución del Fitness en cada Generación', fontsize=18)
+plt.xlabel('Generación', fontsize=14)
+plt.ylabel('Fitness Promedio', fontsize=14)
+plt.xticks(range(1, num_generaciones + 1))  # Asegurar etiquetas de eje x como enteros
+plt.grid(True, linestyle='--', alpha=0.7)
+
+plt.text(num_generaciones + 0.5, fit_generacion[-1], f'{fit_generacion[-1]:.2f}', color='r', fontsize=12)
+plt.legend()
+
+plt.savefig('grafica_fitness.svg', bbox_inches='tight')
 
 plt.show()
-
