@@ -16,7 +16,7 @@ def pob(n):
 # FITNESS
 def fitness(tablero):
     ataques = sum(1 for i in range(8) for j in range(i + 1, 8) if abs(tablero[i] - tablero[j]) == abs(i - j))
-    return ataques
+    return 28 - ataques
 
 
 # SELECCIÓN DE PADRES UNIVERSAL ESTOCÁSTICA
